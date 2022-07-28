@@ -1,0 +1,22 @@
+.BoxStyles {
+    color: favoriteColor;
+    background-color: otherColor;
+    /* width: 10000 px;
+    height: 10000 px; */
+    font-size: 100px;
+    border: solid;
+}
+
+.InstructionStyles {
+    color: darkgoldenrod;
+    font-size: 25px;
+    /* color: white; */
+    text-align: center;
+    padding-right: 3rem;
+}
+
+.QuoteDisplay-button {
+    margin-bottom: 2rem;
+    color: white;
+    background-color: rgb(133, 99, 10);
+}
