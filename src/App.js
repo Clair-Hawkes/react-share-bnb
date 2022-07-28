@@ -5,6 +5,7 @@ import "./Box.css";
 import Form from './Form.js';
 import { LoremIpsum } from './TestData';
 
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function App() {
 
@@ -20,8 +21,8 @@ function App() {
 
   // TODO:
   async function ShareBnB(){
-    // const resp = await Axios.get('http://localhost:5001/api/listings')
-    const resp = (await axios({ url: 'http://localhost:5001/api/listings',method:"get"})).data;
+    const resp = (await axios({ url: BASE_URL,method:"get"})).data;
+
     console.log("resp.data = ",resp);
     return resp;
   }
@@ -43,7 +44,7 @@ function App() {
 
     if (!formData) {delete formData.file}
     const resp = (await axios({
-      url: 'http://localhost:5001/api/listings',
+      url: BASE_URL,
       method:"post",
       data:formData,
       // headers: {
