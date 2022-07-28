@@ -4,11 +4,14 @@ import axios from "axios";
 import "./Box.css";
 import Form from './Form.js';
 import { LoremIpsum } from './TestData';
+import { useState } from 'react';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function App() {
-
+  const [listings, setListings] = useState("");
+  console.log("In App", listings);
+  // let new_listing = "";
   // HandleForm
   //Calls our API!
 
@@ -47,13 +50,18 @@ function App() {
       url: BASE_URL,
       method:"post",
       data:formData,
-      // headers: {
-      //   'Content-Type': 'multipart/form-data'
-      // },
     }));
     console.log(resp.data);
+    setListings(resp.data.listing);
   }
 
+  function ListingCard({ listing }) {
+    return (
+      <div>
+        {listing.title}
+      </div>
+    )
+  }
 
   return (
     <div className="App">
@@ -61,7 +69,7 @@ function App() {
       <Title message={"Welcome to ShareBnB!"}></Title>
       <Instruction message={"API INSTYRUCTIUONS"}></Instruction>
       <Form handleSave={createBnB}></Form>
-
+      {listings && <ListingCard listing={listings} />}
 
 
 
