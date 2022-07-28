@@ -21,11 +21,26 @@ function App() {
   // TODO:
   async function ShareBnB(){
     // const resp = await Axios.get('http://localhost:5001/api/listings')
-    const resp = (await axios({ url: 'http://localhost:5001/api/listings',method:"get"})).data;
+    const resp = (await axios({ url: 'http://localhost:5000/api/listings',method:"get"})).data;
     console.log("resp.data = ",resp);
     return resp;
   }
   ShareBnB();
+
+  // Need POST axios request
+  // Get file submission to Flask to pass to AWS
+  // takes a file from form (formData)
+  // passed to axios POST request /api/listings
+  // resp.data -> new listing {}
+
+  /** Accepts param file as
+   *    fileInput.current.files[0]
+  */
+  async function createBnB(formData){
+    console.log("in createBnB", formData);
+    const resp = (await axios({ url: 'http://localhost:5000/api/listings',method:"post", data:formData}));
+    console.log(resp.data);
+  }
 
 
   return (
@@ -33,7 +48,7 @@ function App() {
 
       <Title message={"Welcome to ShareBnB!"}></Title>
       <Instruction message={"API INSTYRUCTIUONS"}></Instruction>
-      <Form></Form>
+      <Form handleSave={createBnB}></Form>
 
 
 

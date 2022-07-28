@@ -18,9 +18,10 @@ const defaultInitialFormData = {
  */
 
 // TODO: handleSubmit
+
 function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
   const [formData, setFormData] = useState(initialFormData);
-  console.log("ListingForm",formData);
+  // console.log("ListingForm",formData);
 
   const fileInput = React.createRef();
 
@@ -39,10 +40,12 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
     // handleSave(formData);
     // setFormData(initialFormData);
     console.log('form-Data',formData)
+    handleSave(formData);
+    console.log("wooooo!!!?");
 
-    alert(
-      `Selected file - ${fileInput.current.files[0].name}`
-    );
+    // alert(
+    //   `Selected file - ${fileInput.current.files[0].name}`
+    // );
 
   }
 
@@ -118,7 +121,7 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
 
           <div className="mb-3">
           <label htmlFor="file">File:
-          <input type="file" name="file" id="file" ref={fileInput} required/>
+          <input type="file" name="file" id="file" ref={fileInput} />
           </label>
           </div>
 
