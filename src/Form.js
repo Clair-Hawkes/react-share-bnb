@@ -40,8 +40,11 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
     // handleSave(formData);
     // setFormData(initialFormData);
     console.log('form-Data',formData)
+    console.log(`Selected file - ${fileInput.current.files[0].name}`);
+    formData.file = fileInput.current.files[0];
+    console.log(formData);
     handleSave(formData);
-    console.log("wooooo!!!?");
+
 
     // alert(
     //   `Selected file - ${fileInput.current.files[0].name}`

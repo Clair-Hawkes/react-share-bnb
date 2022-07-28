@@ -21,7 +21,7 @@ function App() {
   // TODO:
   async function ShareBnB(){
     // const resp = await Axios.get('http://localhost:5001/api/listings')
-    const resp = (await axios({ url: 'http://localhost:5000/api/listings',method:"get"})).data;
+    const resp = (await axios({ url: 'http://localhost:5001/api/listings',method:"get"})).data;
     console.log("resp.data = ",resp);
     return resp;
   }
@@ -38,7 +38,18 @@ function App() {
   */
   async function createBnB(formData){
     console.log("in createBnB", formData);
-    const resp = (await axios({ url: 'http://localhost:5000/api/listings',method:"post", data:formData}));
+    // Condotional check if formData.file is ""
+    //If empty string remove that key from formData
+
+    if (!formData) {delete formData.file}
+    const resp = (await axios({
+      url: 'http://localhost:5001/api/listings',
+      method:"post",
+      data:formData,
+      // headers: {
+      //   'Content-Type': 'multipart/form-data'
+      // },
+    }));
     console.log(resp.data);
   }
 
