@@ -1,5 +1,6 @@
 import './App.css';
-import axios, { Axios } from 'axios';
+// import { Axios } from 'axios';
+import axios from "axios";
 import "./Box.css";
 import Form from './Form.js';
 import { LoremIpsum } from './TestData';
@@ -18,18 +19,23 @@ function App() {
   }
 
   // TODO:
-  // async function ShareBnB({}){
-  //   const resp = await Axios.get('http://localhost:5001/api/listings')
-  //   return <div><b className="InstructionStyles">{resp}</b></div>;
-  // }
+  async function ShareBnB(){
+    // const resp = await Axios.get('http://localhost:5001/api/listings')
+    const resp = (await axios({ url: 'http://localhost:5001/api/listings',method:"get"})).data;
+    console.log("resp.data = ",resp);
+    return resp;
+  }
+  ShareBnB();
 
 
   return (
     <div className="App">
 
       <Title message={"Welcome to ShareBnB!"}></Title>
-      <Instruction></Instruction>
+      <Instruction message={"API INSTYRUCTIUONS"}></Instruction>
       <Form></Form>
+
+
 
 
     </div>
