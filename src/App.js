@@ -89,7 +89,7 @@ function App() {
       <Form handleSave={createBnB}></Form>
       {/* TODO: Map listings */}
       {/* FIXME: */}
-      {!listings? <p>Loading!</p> : <div>{listings.map(listing => <ListingCard listing={listing} />)}
+      {!listings? <p>Loading!</p> : <div>{listings.map(listing => <ListingCard key={listing.title} listing={listing} />)}
       </div>
       }
 
