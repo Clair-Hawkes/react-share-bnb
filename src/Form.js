@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react";
-// TODO: useRef
-
 
 const defaultInitialFormData = {
   title: "",
@@ -16,20 +14,18 @@ const defaultInitialFormData = {
  * Props:
  * - initialFormData
  * - handleSave: function to call in parent.
+ * 
+ * State:
+ * - formData
  *
- * { TodoApp, EditableTodo } -> TodoForm
+ *  App -> ListingForm
  */
-
-// TODO: handleSubmit
 
 function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
   const [formData, setFormData] = useState(initialFormData);
   // console.log("ListingForm",formData);
 
-  // FIXME:
-  // const fileInput = React.createRef();
   const fileInput = useRef();
-
 
   /** Update form input. */
   function handleChange(evt) {
@@ -43,50 +39,25 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
-    // handleSave(formData);
-    // setFormData(initialFormData);
-    // console.log('form-Data', formData);
-    // console.log(`Selected file - ${fileInput.current.files[0].name}`);
-    //TODO: FormData Object has unqiue name:
-    //to remind developer of the existance of the FormData Obj.
-
-    // FIXME: Removing reaching into DOM.
-    // const form = document.querySelector('#createlisting');
-    // const jsFormDataObj = new FormData(form);
-
     const jsFormDataObj = new FormData();
 
-
-    // FIXME: Move back to appending data not reaching into DOM
     jsFormDataObj.append('file', fileInput.current.files[0]);
-    // jsFormDataObj.append('data', formData);
+    jsFormDataObj.append('title', formData.title);
+    jsFormDataObj.append('description', formData.description);
+    jsFormDataObj.append('price', formData.price);
+    jsFormDataObj.append('zipcode', formData.zipcode);
 
-      jsFormDataObj.append('title', formData.title);
-    // TODO: append all form inputs with corresponding name attribute
-      jsFormDataObj.append('description', formData.description);
-      jsFormDataObj.append('price', formData.price);
-      jsFormDataObj.append('zipcode', formData.zipcode);
+    // To view FormData Object: use loop or FormData.get(KEY_NAME)
+    // for(let item of jsFormDataObj){
+    //   console.log("item in jsFormDataObj = ",item);
+    // }
 
-
-
-
-
-    // jsFormDataObj.append('test','test');
-
-    for(let item of jsFormDataObj){
-      console.log("item in jsFormDataObj = ",item);
-    }
-    // formData.file = fileInput.current.files[0];
-    // console.log('jsFormData = ',jsFormDataObj);
     handleSave(jsFormDataObj);
-    // alert(
-    //   `Selected file - ${fileInput.current.files[0].name}`
-    // );
-
   }
 
   return (
-    <form className="NewTodoForm" encType="multipart/form-data" onSubmit={handleSubmit} id="createlisting">
+    <form className="NewTodoForm" encType="multipart/form-data"
+      onSubmit={handleSubmit} id="createlisting">
 
       <div className="mb-3">
         <input
