@@ -12,10 +12,10 @@ function App() {
   const [listings, setListings] = useState("");
   // console.log("In App", listings);
 
-  function Title({ message="Box!" }) {
+  function Title({ message = "Box!" }) {
     return <div><b className="BoxStyles">{message}</b></div>;
   }
-  function Instruction({ message=LoremIpsum }) {
+  function Instruction({ message = LoremIpsum }) {
     return <div><b className="InstructionStyles">{message}</b></div>;
   }
   function ListingCard({ listing }) {
@@ -29,32 +29,32 @@ function App() {
         <br></br>
         <img src={`${AWS_URL}${listing.img_key}`} alt={listing.title} className="listing"></img>
       </div>
-    )
+    );
   }
 
-  useEffect(function fetchListingsOnMount(){
-  async function ShareBnB(){
-    const resp = (await axios({ url: BASE_URL,method:"get"})).data;
+  useEffect(function fetchListingsOnMount() {
+    async function ShareBnB() {
+      const resp = (await axios({ url: BASE_URL, method: "get" })).data;
 
-    console.log("resp.data = ",resp);
-    setListings(resp.listings)
-    return resp;
-  }
-  ShareBnB();
-  },[])
+      console.log("resp.data = ", resp);
+      setListings(resp.listings);
+      return resp;
+    }
+    ShareBnB();
+  }, []);
 
 
   /** TODO: update docstring to reflect JS FormData Object usage
-   * Creates new listing. 
+   * Creates new listing.
   */
-  async function createBnB(formData){
+  async function createBnB(formData) {
     console.log("in createBnB", formData);
 
-    if (!formData) {delete formData.file}
+    if (!formData) { delete formData.file; }
     const resp = (await axios({
       url: BASE_URL,
-      method:"post",
-      data:formData,
+      method: "post",
+      data: formData,
     }));
     setListings(listings => [resp.data.listing, ...listings]);
   }
@@ -74,8 +74,8 @@ function App() {
       {!listings
         ? <p>Loading!</p>
         : <div>{listings.map(listing =>
-            <ListingCard key={listing.title} listing={listing} />)}
-      </div>
+          <ListingCard key={listing.title} listing={listing} />)}
+        </div>
       }
 
     </div>

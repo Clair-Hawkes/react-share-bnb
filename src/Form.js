@@ -14,7 +14,7 @@ const defaultInitialFormData = {
  * Props:
  * - initialFormData
  * - handleSave: function to call in parent.
- * 
+ *
  * State:
  * - formData
  *
