@@ -20,3 +20,15 @@
     color: white;
     background-color: rgb(133, 99, 10);
 }
+
+.listing{
+    width:150px;
+    height:auto;
+}
+
+.listingStyles{
+    border:solid;
+    margin:0;
+    padding:0;
+    color:gold;
+}

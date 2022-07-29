@@ -4,9 +4,10 @@ import axios from "axios";
 import "./Box.css";
 import Form from './Form.js';
 import { LoremIpsum } from './TestData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const AWS_URL = process.env.REACT_APP_AWS_BASE_URL;
 
 function App() {
   const [listings, setListings] = useState("");
@@ -21,15 +22,33 @@ function App() {
   function Instruction({ message=LoremIpsum }) {
     return <div><b className="InstructionStyles">{message}</b></div>;
   }
+  function ListingCard({ listing }) {
+    console.log('AWS IMG URL = ',`${AWS_URL}${listing.img_key}`);
+    return (
+      <div className='listingStyles'>
+        <h5>{listing.title}</h5>
+        <p>{listing.description}</p>
+        <p>{listing.price}</p>
+        <p>{listing.zipcode}</p>
+        <br></br>
+        <img src={`${AWS_URL}${listing.img_key}`} alt={listing.title} className="listing"></img>
+      </div>
+    )
+  }
 
-  // TODO:
+  // TODO: Add a useEffect
+  useEffect(function fetchListingsOnMount(){
   async function ShareBnB(){
     const resp = (await axios({ url: BASE_URL,method:"get"})).data;
 
     console.log("resp.data = ",resp);
+    // FIXME:
+    setListings(resp.listings)
     return resp;
   }
   ShareBnB();
+  },[])
+
 
   // Need POST axios request
   // Get file submission to Flask to pass to AWS
@@ -52,16 +71,15 @@ function App() {
       data:formData,
     }));
     console.log(resp.data);
-    setListings(resp.data.listing);
+    // FIXME:
+    setListings(listings => [...listings,resp.data.listing]);
   }
 
-  function ListingCard({ listing }) {
-    return (
-      <div>
-        {listing.title}
-      </div>
-    )
-  }
+  // TODO: This HAS TO BE DONE IN FLASK!
+  // Flask Filter for listings
+  // Grab test-data from API to Mock call
+  //setListing([Listings that meet the distance requirement])
+
 
   return (
     <div className="App">
@@ -69,7 +87,11 @@ function App() {
       <Title message={"Welcome to ShareBnB!"}></Title>
       <Instruction message={"API INSTYRUCTIUONS"}></Instruction>
       <Form handleSave={createBnB}></Form>
-      {listings && <ListingCard listing={listings} />}
+      {/* TODO: Map listings */}
+      {/* FIXME: */}
+      {!listings? <p>Loading!</p> : <div>{listings.map(listing => <ListingCard listing={listing} />)}
+      </div>
+      }
 
 
 
