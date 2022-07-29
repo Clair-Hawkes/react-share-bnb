@@ -85,7 +85,7 @@ function App() {
     <div className="App">
 
       <Title message={"Welcome to ShareBnB!"}></Title>
-      <Instruction message={"API INSTYRUCTIUONS"}></Instruction>
+      <Instruction message={"API INSTRUCTIONS"}></Instruction>
       <Form handleSave={createBnB}></Form>
       {/* TODO: Map listings */}
       {/* FIXME: */}

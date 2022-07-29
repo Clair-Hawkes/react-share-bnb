@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// TODO: useRef
 
 const defaultInitialFormData = {
   title: "",
@@ -24,6 +25,7 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
   const [formData, setFormData] = useState(initialFormData);
   // console.log("ListingForm",formData);
 
+  // FIXME:
   const fileInput = React.createRef();
 
   /** Update form input. */
@@ -49,7 +51,7 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
     // const jsFormDataObj = new FormData(form);
     const jsFormDataObj = new FormData(form);
 
-
+    // FIXME: Move back to appending data not reaching into DOM
     // jsFormDataObj.append('file', fileInput.current.files[0]);
     // jsFormDataObj.append('data', formData);
 
@@ -58,13 +60,9 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
     for(let item of jsFormDataObj){
       console.log(item);
     }
-
-
     // formData.file = fileInput.current.files[0];
     console.log('jsFormData = ',jsFormDataObj);
     handleSave(jsFormDataObj);
-
-
     // alert(
     //   `Selected file - ${fileInput.current.files[0].name}`
     // );
