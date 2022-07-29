@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 // TODO: useRef
+
 
 const defaultInitialFormData = {
   title: "",
@@ -26,7 +27,9 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
   // console.log("ListingForm",formData);
 
   // FIXME:
-  const fileInput = React.createRef();
+  // const fileInput = React.createRef();
+  const fileInput = useRef();
+
 
   /** Update form input. */
   function handleChange(evt) {
