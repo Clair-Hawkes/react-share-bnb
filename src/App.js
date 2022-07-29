@@ -23,7 +23,7 @@ function App() {
     return <div><b className="InstructionStyles">{message}</b></div>;
   }
   function ListingCard({ listing }) {
-    console.log('AWS IMG URL = ',`${AWS_URL}${listing.img_key}`);
+    // console.log('AWS IMG URL = ',`${AWS_URL}${listing.img_key}`);
     return (
       <div className='listingStyles'>
         <h5>{listing.title}</h5>
@@ -71,8 +71,8 @@ function App() {
       data:formData,
     }));
     console.log(resp.data);
-    // FIXME:
-    setListings(listings => [...listings,resp.data.listing]);
+    // FIXME: ChangeLog: Moving new lissting in front of ...Listings old state
+    setListings(listings => [resp.data.listing, ...listings]);
   }
 
   // TODO: This HAS TO BE DONE IN FLASK!

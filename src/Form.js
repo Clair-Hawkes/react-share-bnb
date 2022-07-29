@@ -45,26 +45,39 @@ function ListingForm({ initialFormData = defaultInitialFormData, handleSave }) {
     evt.preventDefault();
     // handleSave(formData);
     // setFormData(initialFormData);
-    console.log('form-Data', formData);
-    console.log(`Selected file - ${fileInput.current.files[0].name}`);
+    // console.log('form-Data', formData);
+    // console.log(`Selected file - ${fileInput.current.files[0].name}`);
     //TODO: FormData Object has unqiue name:
     //to remind developer of the existance of the FormData Obj.
-    const form = document.querySelector('#createlisting');
-    console.log(form);
+
+    // FIXME: Removing reaching into DOM.
+    // const form = document.querySelector('#createlisting');
     // const jsFormDataObj = new FormData(form);
-    const jsFormDataObj = new FormData(form);
+
+    const jsFormDataObj = new FormData();
+
 
     // FIXME: Move back to appending data not reaching into DOM
-    // jsFormDataObj.append('file', fileInput.current.files[0]);
+    jsFormDataObj.append('file', fileInput.current.files[0]);
     // jsFormDataObj.append('data', formData);
+
+      jsFormDataObj.append('title', formData.title);
+    // TODO: append all form inputs with corresponding name attribute
+      jsFormDataObj.append('description', formData.description);
+      jsFormDataObj.append('price', formData.price);
+      jsFormDataObj.append('zipcode', formData.zipcode);
+
+
+
+
 
     // jsFormDataObj.append('test','test');
 
     for(let item of jsFormDataObj){
-      console.log(item);
+      console.log("item in jsFormDataObj = ",item);
     }
     // formData.file = fileInput.current.files[0];
-    console.log('jsFormData = ',jsFormDataObj);
+    // console.log('jsFormData = ',jsFormDataObj);
     handleSave(jsFormDataObj);
     // alert(
     //   `Selected file - ${fileInput.current.files[0].name}`
